@@ -28,14 +28,14 @@ greatest_dec_profit_Month = None
 with open(budget_data_csv) as budget_data:
     reader = csv.reader(budget_data, delimiter=',')
     header=next(reader) #remove the header row
-    #firstvalue =next(reader)
-    data = list(reader)
-    previous_value = int(data[0][1]) #set the previous value of the profit/lost
-    #previous_value = int(firstvalue[1])
+    #firstvalue =next(reader) # this did not return the correct number of months or total value
+    #data = list(reader) # used in main.py
+    #previous_value = int(data[0][1]) #used in main.py to set the previous value of the profit/lost
+    #print(previous_value)
     # print statements have been added to test variables during the build.  Remove the # to retest.
     #print(previous_value)
-    for row in data:
-    #for row in reader:
+    #for row in data:
+    for row in reader:
         # add the total number or rows min the header to equal the number of months counted
         total_months += 1
         # add the $ amount in index 1 as it goes through the loop
@@ -55,17 +55,17 @@ with open(budget_data_csv) as budget_data:
             greatest_dec_profit_Month = str(row[0])
         previous_value = int(row[1]) # set previous_value to new row
         net_change_list +=[net_change] # add net_change to the net_change_list
-    
-    net_change_list.pop(0) 
-    #print(net_change_list)  
+    net_change_list.pop(0)
+    #print(net_change_list)
+        
     avg_change = sum(net_change_list)/len(net_change_list)
 
     output = f'Financial Analysis\n ---------------------------\n Total Months: {total_months}\n Total: {total_net}\n Avarage Change: {avg_change}\n Greatest Increase in Profit: {greatest_inc_profit_Month} {greatest_inc_profit}\n Greatest Decrease in Profit: {greatest_dec_profit_Month} {greatest_dec_profit}'
-    financial_analysis ="finanical_analysis.txt"
+    financial_analysis ="finanical_analysis_test.txt"
 
    
-    output_path= os.path.join("Resources", "financial_analysis.txt")
-    with open('financial_analysis.txt', "w") as file:
+    output_path= os.path.join("Resources", "financial_analysis_test.txt")
+    with open('financial_analysis_test.txt', "w") as file:
         file.write(output) 
         
     print(f"{output}")
